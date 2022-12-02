@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Solid Template</title>
+    <title>CMS Welcome</title>
     <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,600" rel="stylesheet">
     <link rel="stylesheet" href="dist/css/style.css">
     <script src="https://unpkg.com/animejs@3.0.1/lib/anime.min.js"></script>
@@ -46,9 +46,9 @@
                     <div class="container">
                         <div class="hero-inner">
                             <div class="hero-copy">
-                                <h1 class="hero-title mt-0">Z-Tech CMS</h1>
-                                <p class="hero-paragraph">Content Management Sytem</p>
-                                <p class="hero-paragraph">Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.</p>   
+                                <h1 class="hero-title mt-0">Z-Tech</h1>
+                                <p class="hero-paragraph">Content Management System</p>
+                                <p class="hero-paragraph">Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.</p>
                             </div>
                             <div class="hero-figure anime-element">
                                 <svg class="placeholder" width="528" height="396" viewBox="0 0 528 396">
@@ -57,7 +57,6 @@
                                 <div class="hero-figure-box hero-figure-box-01" data-rotation="45deg"></div>
                                 <div class="hero-figure-box hero-figure-box-02" data-rotation="-45deg"></div>
                                 <div class="hero-figure-box hero-figure-box-03" data-rotation="0deg"></div>
-                                <div class="hero-figure-box hero-figure-box-04" data-rotation="-135deg"></div>
                             </div>
                         </div>
                     </div>
@@ -73,9 +72,9 @@
                                             <img src="dist/images/feature-icon-01.svg" alt="Feature 01">
                                         </div>
                                         <h4 class="feature-title mt-24">Who Are We</h4>
-                                        <p class="text-sm mb-0">We are 3rd year students of UTM majoring in Bioinformatics. 
-                                            Having Application Development as our course is an opportunity for us to develop 
-                                            an interactive application which is user friendly to everyone.</p>
+                                        <p class="text-sm mb-0">We are 3rd year students of UTM, majoring in Science Computer
+                                            Bioinformatics. Having Application Development course gives us opportunity to
+                                            develop an application that user-friendly and interactive for all users in every generation.
                                         </p>
                                     </div>
                                 </div>
@@ -85,7 +84,7 @@
                                             <img src="dist/images/feature-icon-02.svg" alt="Feature 02">
                                         </div>
                                         <h4 class="feature-title mt-24">What We Do</h4>
-                                        <p class="text-sm mb-0">Fermentum posuere urna nec tincidunt praesent semper feugiat nibh. A arcu cursus vitae congue mauris. Nam at lectus urna duis convallis. Mauris rhoncus aenean vel elit scelerisque mauris.</p>
+                                        <p class="text-sm mb-0">Nam at lectus urna duis convallis. Mauris rhoncus aenean vel elit scelerisque mauris.</p>
                                     </div>
                                 </div>
                                 <div class="feature text-center is-revealing">
@@ -94,12 +93,11 @@
                                             <img src="dist/images/feature-icon-03.svg" alt="Feature 03">
                                         </div>
                                         <h4 class="feature-title mt-24">What CMS Offers</h4>
-                                        <p class="text-sm mb-0">Our CMS provides a graphical user interface with features 
-                                            to create, edit, and publish web content without the need to write the code 
-                                            from scratch.</p>
+                                        <p class="text-sm mb-0">Our CMS provides a graphical user interface with features
+                                            to create, edit and publish web content without the need to write code from scratch</p>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
@@ -108,7 +106,7 @@
                 <section class="cta section">
                     <div class="container">
                         <div class="cta-inner section-inner">
-                            <h3 class="section-title mt-0">Interested with our system?</h3>
+                            <h3 class="section-title mt-0">Interested To Our Service?</h3>
                             <div class="cta-cta">
                                 <a class="button button-primary button-wide-mobile" href="#">Register Now</a>
                             </div>
@@ -170,9 +168,8 @@
                 </div>
             </footer>
         </div>
-
+    </div>
         <script src="dist/js/main.min.js"></script>
-    </div>    
 </body>
 
 </html>
