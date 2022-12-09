@@ -7,6 +7,6 @@
     <title>Try</title>
 </head>
 <body>
-    looak at this
+    look at this
 </body>
 </html>
