@@ -46,7 +46,7 @@
                     <div class="container">
                         <div class="hero-inner">
                             <div class="hero-copy">
-                                <h1 class="hero-title mt-0">Z-Tech</h1>
+                                <h1 class="hero-title mt-0">Z-Tech (try)</h1>
                                 <p class="hero-paragraph">Content Management System</p>
                                 <p class="hero-paragraph">Our landing page template works on all devices, so you only have to set it up once, and get beautiful results forever.</p>
                             </div>
