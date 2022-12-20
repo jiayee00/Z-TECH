@@ -20,8 +20,6 @@ Route::get('/', function () {
     return 'home page';
 });
 
-Route::get('store')
-
 Auth::routes();
 
 Route::get('auth/dashboard', [DashboardController::class, 'dashboard'])->name('auth.dashboard')->middleware('auth');
