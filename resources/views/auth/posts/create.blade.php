@@ -29,7 +29,8 @@
             <div class="card-body">
               <h4 class="card-title">Create Post</h4>
 
-              <form class="forms-sample">
+              <form method="post" action="{{ route('posts.store') }}" class="forms-sample">
+                @csrf
                 <div class="form-group">
                   <label for="exampleInputUsername1">Title</label>
                   <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Username">
@@ -38,6 +39,11 @@
                   <label>Category</label>
                   <select name="category" class="form-control">
                     <option disabled selected>Choose Option</option>
+                    @if (count($categories) > 0)
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    @endif
                   </select>
                 </div>
                 <div class="form-group">

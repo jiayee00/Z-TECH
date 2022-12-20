@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\DashboardController;
+use App\Http\Controllers\Auth\PostController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +24,4 @@ Auth::routes();
 
 Route::get('auth/dashboard', [DashboardController::class, 'dashboard'])->name('auth.dashboard')->middleware('auth');
 
-Route::get('auth/posts', function () {
-    return view('auth.posts.create');
-});
+Route::resource('auth/posts', PostController::class);
