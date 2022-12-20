@@ -29,6 +29,16 @@
             <div class="card-body">
               <h4 class="card-title">Create Post</h4>
 
+              @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+              @endif
+
               <form method="post" action="{{ route('posts.store') }}" class="forms-sample">
                 @csrf
                 <div class="form-group">
