@@ -1,51 +1,47 @@
-@extends('dashboard.layouts.auth')
-@section('title', __('backend.forgotPassword'))
+@extends('layouts.app')
+
 @section('content')
-    <div class="center-block w-xxl p-t-3">
-        <div class="p-a-md box-color r box-shadow-z4 text-color">
-            <div class="text-center">
-                @if(Helper::GeneralSiteSettings("style_logo_" . @Helper::currentLanguage()->code) !="")
-                    <img alt="" class="app-logo"
-                         src="{{ URL::to('uploads/settings/'.Helper::GeneralSiteSettings("style_logo_" . @Helper::currentLanguage()->code)) }}">
-                @else
-                    <img alt="" src="{{ URL::to('uploads/settings/nologo.png') }}">
-                @endif
-            </div>
-            <div class="m-y text-muted text-center">
-                {{ __('backend.forgotPassword') }}
-            </div>
-            <div class="text-muted text-left">
-                <p class="text-xs m-t">{{ __('backend.enterYourEmail') }}</p>
-            </div>
-            @if (session('status'))
-                <div class="alert alert-success">
-                    {{ session('status') }}
-                </div>
-            @endif
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Reset Password') }}</div>
 
-            <form name="reset" method="POST" action="{{ url('/'.env('BACKEND_PATH').'/password/email') }}">
-                {{ csrf_field() }}
-                <div class="md-form-group {{ $errors->has('email') ? ' has-error' : '' }}">
-                    <input type="email" name="email" value="{{ old('email') }}" class="md-input" required>
-                    <label>{{ __('backend.yourEmail') }}</label>
-                </div>
-                @if ($errors->has('email'))
-                    <div class="alert alert-danger">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                        {{ $errors->first('email') }}
-                    </div>
-                @endif
-                <button type="submit"
-                        class="btn primary btn-block p-x-md">{{ __('backend.sendPasswordResetLink') }}</button>
-            </form>
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
 
-            <p id="alerts-container"></p>
-            <div class="p-v-lg text-center">{{ __('backend.returnTo') }} <a href="{{ url('/'.env('BACKEND_PATH').'/login') }}"
-                                                                            class="text-primary _600">{{ __('backend.signIn') }}</a>
-        </div>
+                    <form method="POST" action="{{ route('password.email') }}">
+                        @csrf
+
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Send Password Reset Link') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
+</div>
 @endsection
-

@@ -1,97 +1,73 @@
-@extends('dashboard.layouts.auth')
-@section('title', __('backend.signedInToControl'))
+@extends('layouts.app')
+
 @section('content')
-    <div class="center-block w-xxl p-t-3">
-        <div class="p-a-md box-color r box-shadow-z4 text-color m-b-0">
-            <div class="text-center">
-                @if(Helper::GeneralSiteSettings("style_logo_" . @Helper::currentLanguage()->code) !="")
-                    <img alt="" class="app-logo"
-                         src="{{ URL::to('uploads/settings/'.Helper::GeneralSiteSettings("style_logo_" . @Helper::currentLanguage()->code)) }}">
-                @else
-                    <img alt="" src="{{ URL::to('uploads/settings/nologo.png') }}">
-                @endif
-            </div>
-            <div class="m-y text-muted text-center">
-                {{ __('backend.signedInToControl') }}
-            </div>
-            <form name="form" method="POST" action="{{ url('/'.env('BACKEND_PATH').'/login') }}">
-                {{ csrf_field() }}
-                @if($errors ->any())
-                    <div class="alert alert-danger m-b-0">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                        @foreach($errors->all() as $error)
-                            <div>{{ $error }}</div>
-                        @endforeach
-                    </div>
-                @endif
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Login') }}</div>
 
-                <div class="md-form-group float-label {{ $errors->has('email') ? ' has-error' : '' }}">
-                    <input type="email" name="email" value="{{ old('email') }}" class="md-input" required>
-                    <label>{{ __('backend.connectEmail') }}</label>
-                </div>
-                <div class="md-form-group float-label {{ $errors->has('password') ? ' has-error' : '' }}">
-                    <input type="password" name="password" class="md-input" required>
-                    <label>{{ __('backend.connectPassword') }}</label>
-                </div>
-                @if ($errors->has('password'))
-                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
                                     </span>
-                @endif
-                <div class="m-b-md text-left">
-                    <label class="md-check">
-                        <input type="checkbox" name="remember"><i
-                            class="primary"></i> {{ __('backend.keepMeSignedIn') }}
-                    </label>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6 offset-md-4">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+
+                                    <label class="form-check-label" for="remember">
+                                        {{ __('Remember Me') }}
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-0">
+                            <div class="col-md-8 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Login') }}
+                                </button>
+
+                                @if (Route::has('password.request'))
+                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                        {{ __('Forgot Your Password?') }}
+                                    </a>
+                                @endif
+                            </div>
+                        </div>
+                    </form>
                 </div>
-                <button type="submit" class="btn primary btn-block p-x-md m-b">{{ __('backend.signIn') }}</button>
-            </form>
-            @if(env("FACEBOOK_STATUS") && env("FACEBOOK_ID") && env("FACEBOOK_SECRET"))
-                <a href="{{ route('social.oauth', 'facebook') }}" class="btn btn-primary btn-block text-left">
-                    <i class="fa fa-facebook"></i> {{ __('backend.loginWithFacebook') }}
-                </a>
-            @endif
-            @if(env("TWITTER_STATUS") && env("TWITTER_ID") && env("TWITTER_SECRET"))
-                <a href="{{ route('social.oauth', 'twitter') }}" class="btn btn-info btn-block text-left">
-                    <i class="fa  fa-twitter"></i> {{ __('backend.loginWithTwitter') }}
-                </a>
-            @endif
-            @if(env("GOOGLE_STATUS") && env("GOOGLE_ID") && env("GOOGLE_SECRET"))
-                <a href="{{ route('social.oauth', 'google') }}" class="btn danger btn-block text-left">
-                    <i class="fa fa-google"></i> {{ __('backend.loginWithGoogle') }}
-                </a>
-            @endif
-            @if(env("LINKEDIN_STATUS") && env("LINKEDIN_ID") && env("LINKEDIN_SECRET"))
-                <a href="{{ route('social.oauth', 'linkedin') }}" class="btn btn-primary btn-block text-left">
-                    <i class="fa fa-linkedin"></i> {{ __('backend.loginWithLinkedIn') }}
-                </a>
-            @endif
-            @if(env("GITHUB_STATUS") && env("GITHUB_ID") && env("GITHUB_SECRET"))
-                <a href="{{ route('social.oauth', 'github') }}" class="btn btn-default dark btn-block text-left">
-                    <i class="fa fa-github"></i> {{ __('backend.loginWithGitHub') }}
-                </a>
-            @endif
-            @if(env("BITBUCKET_STATUS") && env("BITBUCKET_ID") && env("BITBUCKET_SECRET"))
-                <a href="{{ route('social.oauth', 'bitbucket') }}" class="btn primary btn-block text-left">
-                    <i class="fa fa-bitbucket"></i> {{ __('backend.loginWithBitbucket') }}
-                </a>
-            @endif
-
-            @if(Helper::GeneralWebmasterSettings("register_status"))
-                <a href="{{ url('/'.env('BACKEND_PATH').'/register') }}" class="btn info btn-block text-left">
-                    <i class="fa fa-user-plus"></i> {{ __('backend.createNewAccount') }}
-                </a>
-            @endif
-            <div class="p-v-lg text-center">
-                <div class="m-t"><a href="{{ url('/'.env('BACKEND_PATH').'/password/reset') }}"
-                                    class="text-primary _600">{{ __('backend.forgotPassword') }}</a></div>
             </div>
-
         </div>
-
-
     </div>
+</div>
 @endsection
-

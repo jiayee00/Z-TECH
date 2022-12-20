@@ -9,13 +9,9 @@ class VerifyCsrfToken extends Middleware
     /**
      * The URIs that should be excluded from CSRF verification.
      *
-     * @var array
+     * @var array<int, string>
      */
     protected $except = [
-        // Disable for API post routes
-        'api/v1/subscribe',
-        'api/v1/contact',
-        'api/v1/comment',
-        'api/v1/order',
+        //
     ];
 }

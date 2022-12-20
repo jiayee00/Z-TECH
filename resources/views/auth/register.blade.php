@@ -1,73 +1,77 @@
-@if(Helper::GeneralWebmasterSettings("register_status"))
-    @extends('dashboard.layouts.auth')
-    @section('title', __('backend.createNewAccount'))
+@extends('layouts.app')
+
 @section('content')
-    <div class="center-block w-xxl p-t-3">
-        <div class="p-a-md box-color r box-shadow-z4 text-color">
-            <div class="text-center">
-                @if(Helper::GeneralSiteSettings("style_logo_" . @Helper::currentLanguage()->code) !="")
-                    <img alt="" class="app-logo"
-                         src="{{ URL::to('uploads/settings/'.Helper::GeneralSiteSettings("style_logo_" . @Helper::currentLanguage()->code)) }}">
-                @else
-                    <img alt="" src="{{ URL::to('uploads/settings/nologo.png') }}">
-                @endif
-            </div>
-            <div class="m-y text-muted text-center">
-                {{ __('backend.newUser') }}
-            </div>
-            <form role="form" method="POST" action="{{ route('register') }}">
-                {{ csrf_field() }}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Register') }}</div>
 
-                @if ($errors->has('name'))
-                    <div class="alert alert-warning">
-                        {{ $errors->first('name') }}
-                    </div>
-                @endif
-                @if ($errors->has('email'))
-                    <div class="alert alert-warning">
-                        {{ $errors->first('email') }}
-                    </div>
-                @endif
-                @if ($errors->has('password'))
-                    <div class="alert alert-warning">
-                        {{ $errors->first('password') }}
-                    </div>
-                @endif
-                <div class="md-form-group">
-                    <input id="name" type="text" class="md-input" name="name" value="{{ old('name') }}" required
-                           autofocus>
-                    <label>{{ __('backend.fullName') }}</label>
-                </div>
-                <div class="md-form-group">
-                    <input id="email" type="email" class="md-input" name="email" value="{{ old('email') }}" required>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
 
-                    <label>{{ __('backend.connectEmail') }}</label>
-                </div>
-                <div class="md-form-group">
-                    <input id="password" type="password" class="md-input" name="password" required>
-                    <label>{{ __('backend.connectPassword') }}</label>
-                </div>
-                <div class="md-form-group">
-                    <input id="password-confirm" type="password" class="md-input" name="password_confirmation" required>
-                    <label>{{ __('backend.confirmPassword') }}</label>
-                </div>
+                        <div class="row mb-3">
+                            <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Name') }}</label>
 
-                <button type="submit" class="btn primary btn-block p-x-md"><i
-                        class="material-icons">&#xe7fe;</i> {{ __('backend.createNewAccount') }}</button>
-            </form>
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-            <div class="p-v-lg text-center m-t-1">
-                <div>{{ __('backend.signedInToControl') }} <a href="{{ url('/'.env('BACKEND_PATH').'/login') }}"
-                                                              class="text-primary _600">{{ __('backend.signIn') }}</a>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="email" class="col-md-4 col-form-label text-md-end">{{ __('Email Address') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="password" class="col-md-4 col-form-label text-md-end">{{ __('Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password">
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirm Password') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
+                            </div>
+                        </div>
+
+                        <div class="row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-
     </div>
+</div>
 @endsection
-@else
-    <script>
-        window.location.href = '{{url("/login")}}';
-    </script>
-@endif
-

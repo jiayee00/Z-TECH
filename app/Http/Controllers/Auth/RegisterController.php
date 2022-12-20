@@ -8,8 +8,6 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
-use Redirect;
-use Helper;
 
 class RegisterController extends Controller
 {
@@ -31,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/admin';
+    protected $redirectTo = 'auth/dashboard';
 
     /**
      * Create a new controller instance.
@@ -70,8 +68,6 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'status' => true,
-            'permissions_id' => Helper::GeneralWebmasterSettings("permission_group"),    // Permission Group ID
         ]);
     }
 }
