@@ -33,7 +33,7 @@
                 @csrf
                 <div class="form-group">
                   <label for="exampleInputUsername1">Title</label>
-                  <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Username">
+                  <input type="text" name="title" class="form-control" id="exampleInputUsername1" placeholder="Username">
                 </div>
                 <div class="form-group">
                   <label>Category</label>
@@ -56,7 +56,7 @@
                 </div>
                 <div class="form-group">
                   <label>File upload</label>
-                  <input type="file" name="image" class="form-control">
+                  <input type="file" name="file" class="form-control">
                 </div>
                 <div class="form-group">
                   <label>Description</label>
