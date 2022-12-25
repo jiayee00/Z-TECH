@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('section')
+@section('content')
 <!-- partial -->
 <div class="main-panel">
     <div class="content-wrapper">
